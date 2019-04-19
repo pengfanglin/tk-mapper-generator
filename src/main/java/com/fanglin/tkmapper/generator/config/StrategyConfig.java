@@ -80,41 +80,12 @@ public class StrategyConfig {
      */
     @Setter(AccessLevel.NONE)
     private String[] exclude = null;
-    /**
-     * 实体是否生成 serialVersionUID
-     */
-    private boolean entitySerialVersionUID = true;
-    /**
-     * 【实体】是否生成字段常量（默认 false）<br>
-     * -----------------------------------<br>
-     * public static final String ID = "test_id";
-     */
-    private boolean entityColumnConstant = false;
-    /**
-     * 【实体】是否为构建者模型（默认 false）
-     */
-    private boolean entityBuilderModel = false;
 
     /**
      * Boolean类型字段是否移除is前缀（默认 false）<br>
      * 比如 : 数据库字段名称 : 'is_xxx',类型为 : tinyint. 在映射实体的时候则会去掉is,在实体类中映射最终结果为 xxx
      */
     private boolean entityBooleanColumnRemoveIsPrefix = false;
-    /**
-     * 生成 <code>@RestController</code> 控制器
-     * <pre>
-     *      <code>@Controller</code> -> <code>@RestController</code>
-     * </pre>
-     */
-    private boolean restControllerStyle = true;
-    /**
-     * 是否生成实体时，生成字段注解
-     */
-    private boolean entityTableFieldAnnotationEnable = false;
-    /**
-     * 乐观锁属性名称
-     */
-    private String versionFieldName;
     /**
      * 表填充字段
      */
