@@ -26,6 +26,10 @@ public class PackageConfig {
      */
     private String entity = "entity";
     /**
+     * Model包名
+     */
+    private String model = "model";
+    /**
      * Service包名
      */
     private String service = "service";

@@ -32,6 +32,8 @@ public class TableInfo {
     private String name;
     private String comment;
     private String entityName;
+    private String modelName;
+    private String lowerModelName;
     private String lowerEntityName;
     private String lowerName;
     private String upperName;
@@ -90,7 +92,11 @@ public class TableInfo {
         this.lowerName = StringUtils.firstToLowerCase(this.upperName);
         return this;
     }
-
+    public TableInfo setModelName(String modelName) {
+        this.modelName = modelName;
+        this.lowerModelName = StringUtils.firstToLowerCase(modelName);
+        return this;
+    }
     public TableInfo setMapperName(String mapperName) {
         this.mapperName = mapperName;
         this.lowerMapperName = StringUtils.firstToLowerCase(mapperName);

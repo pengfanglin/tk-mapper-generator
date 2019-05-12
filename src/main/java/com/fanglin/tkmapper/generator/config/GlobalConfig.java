@@ -51,6 +51,7 @@ public class GlobalConfig {
      * %s 为占位符
      */
     private String entityName = "%sEntity";
+    private String modelName = "%sModel";
     private String mapperName = "%sMapper";
     private String serviceName = "%sService";
     private String serviceImplName = "%sServiceImpl";

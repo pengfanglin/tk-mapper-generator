@@ -1,8 +1,12 @@
-package ${package.entity};
+package ${package.model};
 
 <#list table.importPackages as pkg>
 import ${pkg};
 </#list>
+<#if swagger2>
+import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
+</#if>
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.experimental.Accessors;
@@ -20,29 +24,23 @@ import lombok.experimental.Accessors;
 @EqualsAndHashCode(callSuper = false)
     </#if>
 @Accessors(chain = true)
-@Table(name = "${table.name}")
-<#if superEntityClass??>
-public class ${table.entityName} extends ${superEntityClass} {
+<#if swagger2>
+@ApiModel(value = "${table.modelName}对象", description = "${table.comment!}")
+</#if>
+<#if superModelClass??>
+public class ${table.modelName} extends ${superModelClass} {
 <#else>
-public class ${table.entityName} implements Serializable {
+public class ${table.modelName} implements Serializable {
 </#if>
 <#list table.fields as field>
 
-    <#if field.keyFlag>
-        <#assign keyPropertyName="${field.propertyName}"/>
-    </#if>
     <#if field.comment!?length gt 0>
-    /**
-     * ${field.comment}
-     */
-    </#if>
-    <#if field.keyFlag>
-    <#-- 主键 -->
-        <#if field.keyIdentityFlag>
-    @Id
-    @KeySql(useGeneratedKeys = true)
+        <#if swagger2>
+    @ApiModelProperty(value = "${field.comment}")
         <#else>
-    @Id
+    /**
+    * ${field.comment}
+    */
         </#if>
     </#if>
     private ${field.propertyType} ${field.propertyName};

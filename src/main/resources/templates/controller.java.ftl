@@ -25,7 +25,7 @@ import ${superControllerClassPackage};
  * @date ${date}
  */
 @RestController
-@RequestMapping("/${table.entityPath}/")
+@RequestMapping("/${table.lowerName}/")
 <#if swagger2>
 @Api(value = "/${table.lowerName}/",description = "${table.comment!}")
 </#if>

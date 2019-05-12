@@ -12,6 +12,7 @@ import lombok.experimental.Accessors;
 @Accessors(chain = true)
 public class PackageInfo {
     private String entity;
+    private String model;
     private String service;
     private String serviceImpl;
     private String mapper;

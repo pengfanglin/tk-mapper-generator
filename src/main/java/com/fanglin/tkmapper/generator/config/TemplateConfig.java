@@ -15,6 +15,7 @@ import lombok.experimental.Accessors;
 public class TemplateConfig {
 
     private String entity = ConstVal.TEMPLATE_ENTITY;
+    private String model = ConstVal.TEMPLATE_MODEL;
 
     private String service = ConstVal.TEMPLATE_SERVICE;
 

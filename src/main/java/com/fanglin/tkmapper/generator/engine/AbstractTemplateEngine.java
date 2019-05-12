@@ -61,6 +61,14 @@ public abstract class AbstractTemplateEngine {
                     writer(params, templateFilePath(template.getEntity()), entityFile);
                 }
             }
+            // Model.java
+            String modelName = tableInfo.getModelName();
+            if (modelName != null) {
+                String modelFile = String.format((pathInfo.getModel() + File.separator + tableInfo.getModelName() + suffixJava()), entityName);
+                if (isCreate(modelFile)) {
+                    writer(params, templateFilePath(template.getModel()), modelFile);
+                }
+            }
             // tKMapper.java
             if (tableInfo.getMapperName() != null) {
                 String mapperFile = String.format((pathInfo.getMapper() + File.separator + tableInfo.getMapperName() + suffixJava()), entityName);

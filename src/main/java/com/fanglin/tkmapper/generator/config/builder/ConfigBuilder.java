@@ -138,12 +138,13 @@ public class ConfigBuilder {
     private void handlerPackage(TemplateConfig template, String outputDir, PackageConfig config) {
         // 包信息
         packageInfo = new PackageInfo()
-            .setEntity(joinPackage(config.getParent(), config.getEntity()))
-            .setMapper(joinPackage(config.getParent(), config.getMapper()))
-            .setService(joinPackage(config.getParent(), config.getService()))
-            .setServiceImpl(joinPackage(config.getParent(), config.getServiceImpl()))
-            .setController(joinPackage(config.getParent(), config.getController()))
-            .setCore(joinPackage(config.getParent(), config.getCore()));
+                .setEntity(joinPackage(config.getParent(), config.getEntity()))
+                .setModel(joinPackage((config.getParent()), config.getModel()))
+                .setMapper(joinPackage(config.getParent(), config.getMapper()))
+                .setService(joinPackage(config.getParent(), config.getService()))
+                .setServiceImpl(joinPackage(config.getParent(), config.getServiceImpl()))
+                .setController(joinPackage(config.getParent(), config.getController()))
+                .setCore(joinPackage(config.getParent(), config.getCore()));
 
         // 自定义路径
         PathInfo configPathInfo = config.getPathInfo();
@@ -154,6 +155,9 @@ public class ConfigBuilder {
             pathInfo = new PathInfo();
             if (!OthersUtils.isEmpty(template.getEntity())) {
                 pathInfo.setEntity(joinPath(outputDir, packageInfo.getEntity()));
+            }
+            if (!OthersUtils.isEmpty(template.getModel())) {
+                pathInfo.setModel(joinPath(outputDir, packageInfo.getModel()));
             }
             if (!OthersUtils.isEmpty(template.getMapper())) {
                 pathInfo.setMapper(joinPath(outputDir, packageInfo.getMapper()));
@@ -231,6 +235,11 @@ public class ConfigBuilder {
             String entityName = NamingStrategy.capitalFirst(processName(tableInfo.getName(), strategy, tablePrefix));
             if (StringUtils.isNotEmpty(globalConfig.getEntityName())) {
                 tableInfo.setEntityName(String.format(globalConfig.getEntityName(), entityName));
+            } else {
+                tableInfo.setEntityName(entityName + ConstVal.ENTITY);
+            }
+            if (StringUtils.isNotEmpty(globalConfig.getModelName())) {
+                tableInfo.setModelName(String.format(globalConfig.getModelName(), entityName));
             } else {
                 tableInfo.setEntityName(entityName + ConstVal.ENTITY);
             }
@@ -398,7 +407,7 @@ public class ConfigBuilder {
      */
     private boolean tableNameMatches(String setTableName, String dbTableName) {
         return setTableName.equals(dbTableName)
-            || StringUtils.matches(setTableName, dbTableName);
+                || StringUtils.matches(setTableName, dbTableName);
     }
 
     /**
@@ -438,8 +447,8 @@ public class ConfigBuilder {
                 tableFieldsSql = String.format(tableFieldsSql, tableName);
             }
             try (
-                PreparedStatement preparedStatement = connection.prepareStatement(tableFieldsSql);
-                ResultSet results = preparedStatement.executeQuery()) {
+                    PreparedStatement preparedStatement = connection.prepareStatement(tableFieldsSql);
+                    ResultSet results = preparedStatement.executeQuery()) {
                 while (results.next()) {
                     TableField field = new TableField();
                     String columnName = results.getString(dbQuery.fieldName());
@@ -493,7 +502,7 @@ public class ConfigBuilder {
                     if (null != tableFillList) {
                         // 忽略大写字段问题
                         tableFillList.stream().filter(tf -> tf.getFieldName().equalsIgnoreCase(field.getName()))
-                            .findFirst().ifPresent(tf -> field.setFill(tf.getFieldFill().name()));
+                                .findFirst().ifPresent(tf -> field.setFill(tf.getFieldFill().name()));
                     }
                     fieldList.add(field);
                 }

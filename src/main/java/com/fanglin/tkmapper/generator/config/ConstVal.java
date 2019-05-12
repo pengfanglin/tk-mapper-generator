@@ -15,6 +15,7 @@ import java.nio.charset.StandardCharsets;
 public interface ConstVal {
 
     String ENTITY = "Entity";
+    String MODEL = "Model";
     String SERVICE = "Service";
     String SERVICE_IMPL = "ServiceImpl";
     String MAPPER = "Mapper";
@@ -28,6 +29,7 @@ public interface ConstVal {
     String JAVA_SUFFIX = StringPool.DOT_JAVA;
 
     String TEMPLATE_ENTITY = "/templates/entity.java";
+    String TEMPLATE_MODEL = "/templates/model.java";
     String TEMPLATE_MAPPER = "/templates/mapper.java";
     String TEMPLATE_MAPPER_FACTORY = "/templates/mapperFactory.java";
     String TEMPLATE_PAGE = "/templates/page.java";
